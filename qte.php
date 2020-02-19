@@ -9,7 +9,7 @@
    }
    $all_accounts = $conn->query("SELECT * FROM `accounts` ORDER BY name ASC");
    $all_banks = $conn->query("SELECT * FROM `arm_bank` ORDER BY bank_name ASC");
-   $all_terms = $conn->query("SELECT * FROM `arm_payment_terms` ORDER BY description ASC");
+   $all_terms = $conn->query("SELECT * FROM `arm_payment_terms` ORDER BY `desc` ASC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,7 +137,7 @@ tr:hover .cut { opacity: 1; }
                                                   <option value="">Select Payment Term</option>
                                                   <?php 
                                                     while($terms = $all_terms->fetch_assoc()) {
-                                                      echo "<option value='".$terms['description']."'>".$terms['description']."</option>";
+                                                      echo "<option value='".$terms['desc']."'>".$terms['desc']."</option>";
                                                     }
                                                   ?>
                                                 </select><br/>
@@ -152,6 +152,7 @@ tr:hover .cut { opacity: 1; }
                                               <th width="20%">Product</th>
                                               <th width="7%">Garnet</th>
                                               <th width="7%">Grade</th>
+                                              <th width="7%">Quantity</th>
                                               <th width="10%">Amount</th>
                                               <th width="3%" rowspan="2"></th>
                                             </tr>
@@ -160,6 +161,7 @@ tr:hover .cut { opacity: 1; }
                                               <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm process_keyup" onkeypress="myFunction()"/><div id="display1"></div></td>
                                               <td><input type="text" name="order_item_garnet[]" id="order_item_garnet1" data-srno="1" class="form-control input-sm order_item_quantity" /></td>
                                               <td><input type="text" name="order_item_grade[]" id="order_item_grade1" data-srno="1" class="form-control input-sm number_only order_item_price" /></td>
+                                              <td><input type="text" name="order_item_quantity[]" id="order_item_quantity1" data-srno="1" class="form-control input-sm number_only order_item_quantity" /></td>
                                               <td><input type="text" name="order_item_actual_amount[]" id="order_item_actual_amount1" data-srno="1" class="form-control input-sm order_item_actual_amount" /></td>
                                             </tr>
                                           </table>
@@ -284,6 +286,7 @@ tr:hover .cut { opacity: 1; }
           
           html_code += '<td><input type="text" name="order_item_garnet[]" id="order_item_garnet'+count+'" data-srno="'+count+'" class="form-control input-sm number_only order_item_quantity" /></td>';
           html_code += '<td><input type="text" name="order_item_grade[]" id="order_item_grade'+count+'" data-srno="'+count+'" class="form-control input-sm number_only order_item_price" /></td>';
+          html_code += '<td><input type="text" name="order_item_quantity[]" id="order_item_quantity'+count+'" data-srno="'+count+'" class="form-control input-sm number_only order_item_quantity" /></td>';
           html_code += '<td><input type="text" name="order_item_actual_amount[]" id="order_item_actual_amount'+count+'" data-srno="'+count+'" class="form-control input-sm order_item_actual_amount" /></td>';
 
           html_code += '<td><button type="button" name="remove_row" id="'+count+'" class="btn btn-danger btn-xs remove_row">X</button></td>';

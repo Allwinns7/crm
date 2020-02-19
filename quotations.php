@@ -92,7 +92,7 @@ ini_set('display_errors', 1);
                                               <td>'.$row["order_date"].'</td>
                                               <td>'.$row["order_receiver_name"].'</td>
                                               <td>'.$row["order_receiver_email"].'</td>
-                                              <td><a href="print_invoice.php?pdf=1&id='.$row["id"].'">Send Proforma Quotation</a></td>
+                                              <td><a href="convertproforma.php?id='.$row["id"].'">Create Proforma</a></td>
                                               <td>
                                                 <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
                                                 <a href="vqte.php?id='.$row["id"].'"><span class="glyphicon glyphicon-eye-open"></span></a>

@@ -24,7 +24,7 @@ $specification = $_POST['specification'];
 $packaging = $_POST['packaging'];
 $shipper = $_POST['shipper'];
 
-	$sql = "INSERT INTO `arm_quote` (order_date, order_receiver_name, order_receiver_email, order_receiver_address, packaging, bankdetails, paymentterm, specification, shipper) VALUES ('$order_date', $order_receiver_name, '$order_receiver_email', '$order_receiver_address', '$packaging', '$bankdetails', '$paymentterm', '$specification', '$shipper')";
+	$sql = "INSERT INTO `arm_quote` (order_date, order_receiver_name, order_receiver_email, order_receiver_address, packaging, bank, bankdetails, paymentterm, specification, shipper) VALUES ('$order_date', $order_receiver_name, '$order_receiver_email', '$order_receiver_address', '$packaging', $paymentbank, '$bankdetails', '$paymentterm', '$specification', '$shipper')";
 	//print_r($sql);die;
 	$exe = $conn->query($sql);
 
@@ -44,8 +44,10 @@ $shipper = $_POST['shipper'];
 	      	$order_item_garnet = $_POST["order_item_garnet"][$count];
 	      	$order_item_grade = $_POST["order_item_grade"][$count];
 	      	$order_item_actual_amount = $_POST["order_item_actual_amount"][$count];
+	      	$order_item_quantity = $_POST["order_item_quantity"][$count];
+	      	
 
-	      	$item_sql = "INSERT INTO `arm_quote_item` VALUES (NULL,'$lid', '$item_name', '$order_item_garnet', '$order_item_grade', '$order_item_actual_amount')";
+	      	$item_sql = "INSERT INTO `arm_quote_item` VALUES (NULL,'$lid', '$item_name', '$order_item_garnet', '$order_item_grade', $order_item_quantity, '$order_item_actual_amount')";
 	      	$item_exe = $conn->query($item_sql);
 
 	      	if($item_exe) {
