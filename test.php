@@ -58,6 +58,10 @@
     page-break-after: always;
   }
 }
+.page1 {
+    width: 21cm;
+    padding:unset;
+}
 table td, table p{
   font-size: 12px;
 }
@@ -93,6 +97,16 @@ table td, table p{
                            </div>
                         </div>
                         <div class="panel-body">
+                          <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 page1">
+                              <div class="buttonexport"> 
+                                 <a href="editproforma.php?id=<?php echo $_GET['id'];?>" class="btn btn-add"><i class="fa fa-edit"></i> Edit</a>  
+                                  <a href="#" class="btn btn-success pull-right"><i class="fa fa-check"></i> Convert</a>  
+                              </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                          </div>
                           <div class="row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-8 page">
@@ -216,10 +230,12 @@ table td, table p{
                                           $item_result = $statement->fetchAll();
                                           $m = 0;
                                           $over_all_total =0;
+                                          $over_all_quant =0;
                                           foreach($item_result as $sub_row)
                                           {
                                             $m = $m + 1;
                                             $over_all_total += $sub_row["order_item_quantity"]*$sub_row["order_item_actual_amount"];
+                                            $over_all_quant += $sub_row["order_item_quantity"];
                                           ?>
                                       <tr>
                                         <td>
@@ -232,7 +248,7 @@ table td, table p{
                                           <b><?php echo $sub_row["order_item_garnet"]; ?></b>
                                         </td>
                                         <td>
-                                          <?php echo number_format($sub_row["order_item_quantity"],3); ?>
+                                          <?php echo number_format($sub_row["order_item_quantity"]); ?>
                                         </td>
                                         <td>
                                           <?php echo number_format($sub_row["order_item_actual_amount"],2); ?>
@@ -249,7 +265,7 @@ table td, table p{
                                            US DOLLAR <?php echo get_amnts($over_all_total);?><br><br><br>
                                         </td>
                                         <td>
-                                           27.000
+                                           <?php echo $over_all_quant;?>
                                         </td>
                                         <td>
                                           <b>TOTAL</b>
