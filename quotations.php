@@ -85,14 +85,27 @@ ini_set('display_errors', 1);
                                       if($total_rows > 0)
                                       {
                                         foreach($all_result as $row)
-                                        {
+                                        { 
+
+                                          $qid = $row['id'];
+                                          $check_proforma = $conn->query("SELECT * FROM `arm_proforma` WHERE `quote_no`='$qid'");
+                                          $count = mysqli_num_rows($check_proforma);
+
+                                          $prfr = '';
+                                          if($count>0){
+                                             $prfr = '<a href="view.php?id='.$row["id"].'">View Proforma</a>';
+                                          }
+                                          else {
+                                             $prfr = '<a href="editproforma.php?id='.$row["id"].'">Create Proforma</a>';
+                                          }
+
                                           echo '
                                             <tr>
                                               <td>'.$row["id"].'</td>
                                               <td>'.$row["order_date"].'</td>
                                               <td>'.$row["order_receiver_name"].'</td>
                                               <td>'.$row["order_receiver_email"].'</td>
-                                              <td><a href="test.php?id='.$row["id"].'">Create Proforma</a></td>
+                                              <td>'.$prfr.'</td>
                                               <td>
                                                 <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
                                                 <a href="vqte.php?id='.$row["id"].'"><span class="glyphicon glyphicon-eye-open"></span></a>
